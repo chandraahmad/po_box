@@ -14,4 +14,12 @@ class WelcomeModel extends CI_Model {
 		$query = $this->db->get();
 		return $query->result();
 	}
+
+	public function get_byid_pobox($pobox_id) {
+		$this->db->select('*');
+		$this->db->from('pobox');
+		$this->db->where('pobox_id', $pobox_id);
+		$query = $this->db->get();
+		return $query->row();
+	}
 }

@@ -21,7 +21,7 @@
                     <div class="row">
 						<?php foreach ($GetAllPoBox as $key => $value) { ?>
                             <div class="col-12 col-sm-6 col-md-2">
-                                <a href="javascript:;">
+                                <a href="<?= base_url('Welcome/detail_pobox?id='.$value->pobox_id) ?>">
                                     <div class="info-box">
                                         <span class="info-box-icon bg-info elevation-1"><i class="fas fa-box"></i></span>
                                         <div class="info-box-content">
