@@ -42,6 +42,12 @@
 												</select>
 				                            </div>
 				                        </div>
+				                        <div class="form-group row">
+				                            <label class="col-sm-2 col-form-label">Price *</label>
+				                            <div class="col-sm-10">
+				                                <input type="text" name="pobox_price" class="form-control form-control-sm" placeholder="Price" required>
+				                            </div>
+				                        </div>
 										<div class="form-group row clearfix">
 				                            <label class="col-sm-2 col-form-label">Status *</label>
 				                            <div class="col-sm-10">
@@ -81,6 +87,7 @@
 												<th>#</th>
 												<th>Po Box Number</th>
 												<th>Office</th>
+												<th>Price</th>
 												<th>Status</th>
 												<th>Action</th>
 											</tr>
@@ -91,6 +98,7 @@
 												<td><?= $no++ ?></td>
 												<td><?= $value->pobox_id ?></td>
 												<td><?= $this->PoBoxModel->get_byid_office($value->pobox_office)->office_name ?></td>
+												<td>Rp.<?= number_format($value->pobox_price) ?></td>
 												<td><?= ($value->pobox_status == '1' ? 'Active' : 'Not Active') ?></td>
 												<td>
 													<a href="javascript:;" class="btn btn-sm btn-warning getbyidpobox" data-id="<?= $value->pobox_id ?>"><i class="far fa-edit"></i></a>

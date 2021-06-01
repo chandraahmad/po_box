@@ -19,13 +19,10 @@
         </div>
 
         <nav class="mt-2">
-            <?php if($this->session->userdata('user_type') == '1') { ?>
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <?php if($this->session->userdata('user_type') == '1') { ?>
                 <li class="nav-item">
                     <a href="<?= base_url() ?>Home" <?= ($js_p == 'home.js' ? 'class="nav-link active"' : 'class="nav-link"' ) ?>><i class="nav-icon fas fa-th"></i><p>Home</p></a>
-                </li>
-                <li class="nav-item">
-                    <a href="<?= base_url() ?>PoBox" <?= ($js_p == 'pobox.js' ? 'class="nav-link active"' : 'class="nav-link"' ) ?>><i class="nav-icon fas fa-shopping-cart"></i> <p>Po Box</p></a>
                 </li>
                 <li <?= ($js_p == 'user.js' || $js_p == 'customer.js' || $js_p == 'office.js' ? 'class="nav-item has-treeview menu-open"' : 'class="nav-item has-treeview"' ) ?>>
                     <a href="#" class="nav-link"><i class="nav-icon fas fa-chart-pie"></i><p>Master<i class="right fas fa-angle-left"></i></p></a>
@@ -41,20 +38,35 @@
                         </li>
                     </ul>
                 </li>
-                
-                <li <?= ($js_p == 'floor.js' || $js_p == 'businessfields.js' ? 'class="nav-item has-treeview menu-open"' : 'class="nav-item has-treeview"' ) ?>>
-                    <a href="#" class="nav-link"><i class="nav-icon fas fa-chart-pie"></i><p>Reference<i class="right fas fa-angle-left"></i></p></a>
+                <li class="nav-item">
+                    <a href="<?= base_url() ?>PoBox" <?= ($js_p == 'pobox.js' ? 'class="nav-link active"' : 'class="nav-link"' ) ?>><i class="nav-icon fas fa-box"></i> <p>Po Box</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url() ?>Order" <?= ($js_p == 'order.js' ? 'class="nav-link active"' : 'class="nav-link"' ) ?>><i class="nav-icon fas fa-shopping-cart"></i> <p>Order Transaction</p></a>
+                </li>
+
+                <li <?= ($js_p == 'sort.js' ? 'class="nav-item has-treeview menu-open"' : 'class="nav-item has-treeview"' ) ?>>
+                    <a href="#" class="nav-link"><i class="nav-icon fas fa-dolly-flatbed"></i><p>Shipment<i class="right fas fa-angle-left"></i></p></a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?= base_url() ?>Floor" <?= ($js_p == 'floor.js' ? 'class="nav-link active"' : 'class="nav-link"' ) ?>><i class="far fa-circle nav-icon"></i><p>Floor</p></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url() ?>BusinessFields" <?= ($js_p == 'businessfields.js' ? 'class="nav-link active"' : 'class="nav-link"' ) ?>><i class="far fa-circle nav-icon"></i><p>Business Fields</p></a>
+                            <a href="<?= base_url() ?>Sort" <?= ($js_p == 'sort.js' ? 'class="nav-link active"' : 'class="nav-link"' ) ?>><i class="far fa-circle nav-icon"></i><p>Sort</p></a>
                         </li>
                     </ul>
                 </li>
+                <?php } ?>
+
+
+                <?php if($this->session->userdata('user_type') == '2') { ?>
+                <li <?= ($js_p == 'sort.js' ? 'class="nav-item has-treeview menu-open"' : 'class="nav-item has-treeview"' ) ?>>
+                    <a href="#" class="nav-link"><i class="nav-icon fas fa-dolly-flatbed"></i><p>Shipment<i class="right fas fa-angle-left"></i></p></a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url() ?>Sort" <?= ($js_p == 'sort.js' ? 'class="nav-link active"' : 'class="nav-link"' ) ?>><i class="far fa-circle nav-icon"></i><p>Sort</p></a>
+                        </li>
+                    </ul>
+                </li>
+                <?php } ?>
             </ul>
-            <?php } ?>
         </nav>
         <!-- /.sidebar-menu -->
     </div>

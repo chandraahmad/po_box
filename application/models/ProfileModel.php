@@ -31,6 +31,22 @@ class ProfileModel extends CI_Model {
 		return $char.$id;
 	}
 
+	public function generate_customer_id() {
+		$query=$this->db->query("SELECT MAX(RIGHT(customer_id,2)) AS id_max FROM customer");
+		$id = "";
+		if($query->num_rows() > 0){
+			foreach($query->result() as $kd){
+                $tmp = ((int)$kd->id_max)+1;
+                $id = sprintf("%05s", $tmp);
+            }
+		}else{
+			$id = "00001";
+		}
+
+		$char = "CSR";
+		return $char.$id;
+	}
+
 	public function get_byid_user($user_id) {
 		$this->db->select('*');
 		$this->db->from('user');
@@ -45,6 +61,11 @@ class ProfileModel extends CI_Model {
 		$this->db->where('customer_user_id', $customer_user_id);
 		$query = $this->db->get();        
 		return $query->row();
+	}
+
+	public function insert_customer($data) {
+		$quesry = $this->db->insert('customer', $data);
+		return $quesry;
 	}
 
 	public function insert($data) {

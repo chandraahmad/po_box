@@ -24,12 +24,14 @@ class PoBox extends CI_Controller {
 		$this->form_validation->set_rules('pobox_id', 'Po Box Number', 'trim|required');
         $this->form_validation->set_rules('pobox_office', 'Office', 'trim|required');
         $this->form_validation->set_rules('pobox_status', 'Status', 'trim|required');
+        $this->form_validation->set_rules('pobox_price', 'Price', 'trim|required');
 
 		if ($this->form_validation->run() == TRUE) {
 			
 			$data = array(
 				'pobox_id' => $this->input->post('pobox_id'),
                 'pobox_office' => $this->input->post('pobox_office'),
+                'pobox_price' => $this->input->post('pobox_price'),
                 'pobox_status' => $this->input->post('pobox_status'),
                 'pobox_status_sale' => '0'
 			);
@@ -56,12 +58,14 @@ class PoBox extends CI_Controller {
 		$this->form_validation->set_rules('pobox_id', 'Po Box Number', 'trim|required');
         $this->form_validation->set_rules('pobox_office', 'Office', 'trim|required');
         $this->form_validation->set_rules('pobox_status', 'Status', 'trim|required');
+        $this->form_validation->set_rules('pobox_price', 'Price', 'trim|required');
 
 		if ($this->form_validation->run() == TRUE) {
 			
 			$data = array(
 				'pobox_id' => $this->input->post('pobox_id'),
                 'pobox_office' => $this->input->post('pobox_office'),
+                'pobox_price' => $this->input->post('pobox_price'),
                 'pobox_status' => $this->input->post('pobox_status')
 			);
 			

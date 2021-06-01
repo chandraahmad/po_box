@@ -29,16 +29,33 @@ class Profile extends CI_Controller {
         $this->form_validation->set_rules('customer_email', 'Compay Email', 'trim|required');
 
 		if ($this->form_validation->run() == TRUE) {
-			
-			$data_customer = array(
-				'customer_user_id' => $this->session->userdata('user_id'),
-                'customer_name' => $this->input->post('customer_name'),
-                'customer_address' => $this->input->post('customer_address'),
-                'customer_contact' => $this->input->post('customer_contact'),
-                'customer_email' => $this->input->post('customer_email')
-			);
-			
-			$this->ProfileModel->update_customer($data_customer);
+			$data['GetByIdCustomer'] = $this->ProfileModel->get_byid_customer($this->session->userdata('user_id'));
+			if ($data['GetByIdCustomer'] != NULL) {
+				$data_customer = array(
+	                'customer_name' => $this->input->post('customer_name'),
+	                'customer_address' => $this->input->post('customer_address'),
+	                'customer_pic' => $this->session->userdata('user_name'),
+	                'customer_contact' => $this->input->post('customer_contact'),
+	                'customer_email' => $this->input->post('customer_email'),
+	                'customer_status' => '1',
+	                'customer_user_id' => $this->session->userdata('user_id')
+				);
+				
+				$this->ProfileModel->update_customer($data_customer);
+			}else{
+				$data_customer = array(
+					'customer_id' => $this->ProfileModel->generate_customer_id(),
+	                'customer_name' => $this->input->post('customer_name'),
+	                'customer_address' => $this->input->post('customer_address'),
+	                'customer_pic' => $this->session->userdata('user_name'),
+	                'customer_contact' => $this->input->post('customer_contact'),
+	                'customer_email' => $this->input->post('customer_email'),
+	                'customer_status' => '1',
+	                'customer_user_id' => $this->session->userdata('user_id')
+				);
+				
+				$this->ProfileModel->insert_customer($data_customer);
+			}
 
             $data = array(
 				'user_id' => $this->session->userdata('user_id'),

@@ -87,13 +87,23 @@
 									</div>
 								</div>
 							</div>
-						<?php }else{ ?>
+						<?php }elseif ($value->pobox_status_sale == '1') { ?>
+							<div class="col-12 col-sm-6 col-md-2">
+								<div class="info-box">
+									<span class="info-box-icon bg-warning elevation-1"><i class="fas fa-box"></i></span>
+									<div class="info-box-content">
+										<span class="info-box-text"><?= $value->pobox_id ?></span>
+										<span class="info-box-number">Booked</span>
+									</div>
+								</div>
+							</div>
+						<?php }elseif ($value->pobox_status_sale == '2') { ?>
 							<div class="col-12 col-sm-6 col-md-2">
 								<div class="info-box">
 									<span class="info-box-icon bg-danger elevation-1"><i class="fas fa-box"></i></span>
 									<div class="info-box-content">
 										<span class="info-box-text"><?= $value->pobox_id ?></span>
-										<span class="info-box-number">Booked</span>
+										<span class="info-box-number">Exist</span>
 									</div>
 								</div>
 							</div>

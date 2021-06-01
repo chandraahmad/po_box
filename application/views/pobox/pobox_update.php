@@ -15,6 +15,12 @@
                 </select>
             </div>
         </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Price *</label>
+            <div class="col-sm-10">
+                <input type="text" name="pobox_price" value="<?= @$GetByIdPoBox->pobox_price ?>" class="form-control form-control-sm" placeholder="Price" required>
+            </div>
+        </div>
         <div class="form-group row clearfix">
             <label class="col-sm-2 col-form-label">Status *</label>
             <div class="col-sm-10">
