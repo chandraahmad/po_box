@@ -34,14 +34,16 @@ class Sort extends CI_Controller {
 	}
 
 	public function insert() {
-		$this->form_validation->set_rules('shipment_pobox', 'Barcode / Resi Number', 'trim|required');
+		$this->form_validation->set_rules('shipment_barcode', 'Barcode / Resi Number', 'trim|required|is_unique[shipment.shipment_barcode]');
 
 		if ($this->form_validation->run() == TRUE) {
 			
 			$data = array(
 				'shipment_id' => $this->SortModel->generate_shipment_id(),
                 'shipment_barcode' => $this->input->post('shipment_barcode'),
-                'shipment_pobox' => $this->input->post('shipment_pobox')
+                'shipment_pobox' => $this->input->post('shipment_pobox'),
+                'shipment_officer' => $this->session->userdata('user_id'),
+                'shipment_date_entry' => date('Y-m-d H:i:s')
 			);
 			
 			$result = $this->SortModel->insert($data);

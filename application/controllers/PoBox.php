@@ -21,7 +21,7 @@ class PoBox extends CI_Controller {
 	}
 
 	public function insert() {
-		$this->form_validation->set_rules('pobox_id', 'Po Box Number', 'trim|required');
+		$this->form_validation->set_rules('pobox_id', 'Po Box Number', 'trim|required|is_unique[pobox.pobox_id]');
         $this->form_validation->set_rules('pobox_office', 'Office', 'trim|required');
         $this->form_validation->set_rules('pobox_status', 'Status', 'trim|required');
         $this->form_validation->set_rules('pobox_price', 'Price', 'trim|required');

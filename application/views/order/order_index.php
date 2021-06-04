@@ -40,6 +40,8 @@
 												<th>Rental Month</th>
 												<th>Status</th>
 												<th>Date Transaction</th>
+												<th>Date Payment</th>
+												<th>Date Confirm</th>
 												<th>Proof of payment</th>
 												<th>Action</th>
 											</tr>
@@ -50,7 +52,7 @@
 												<td><?= $no++ ?></td>
 												<td><?= $value->transaction_id ?></td>
 												<td><?= $value->transaction_pobox ?></td>
-												<td><?= $value->transaction_user ?></td>
+												<td><?= $this->OrderModel->get_byid_user($value->transaction_user)->user_name; ?></td>
 												<td><?= number_format($value->transaction_total_price); ?></td>
 												<td><?= $value->transaction_from_date ?></td>
 												<td><?= $value->transaction_until_date ?></td>
@@ -61,6 +63,8 @@
 													<?= ($value->transaction_status == '3' ? 'Paid' : '') ?>
 												</td>
 												<td><?= $value->transaction_date ?></td>
+												<td><?= $value->transaction_date_pay ?></td>
+												<td><?= $value->transaction_date_confirm ?></td>
 												<td><img src="<?= base_url('assets/') ?>bukti_pembayaran/<?= $value->transaction_id ?>.png" style="width: 300px; height: 200px;"></td>
 												<td>
 													<?php if ($value->transaction_status == '2' && file_exists(base_url('assets/bukti_pembayaran/'.$value->transaction_id.'.png')) == false) { ?>

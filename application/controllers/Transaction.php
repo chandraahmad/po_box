@@ -35,6 +35,20 @@ class Transaction extends CI_Controller {
 		}
 	}
 
+	public function extension_form1() {
+		$id = @$_GET['id'];
+		$data['js_p'] = "transaction.js";
+		$data['GetByIdPoBox'] = $this->TransactionModel->get_byid_pobox($id);
+		if($data['GetByIdPoBox'] != NULL && $this->session->userdata('user_email') != NULL) {
+			$valDate = @$this->TransactionModel->get_byid_transaction('transaction_user', $this->session->userdata('user_id'));
+			$this->load->view('layouts/header_fe.php');
+			$this->load->view('transaction/transaction_pobox', $data);
+			$this->load->view('layouts/footer_fe.php', $data);
+		}else{
+			redirect();
+		}
+	}
+
 	public function insert() {
 		$this->form_validation->set_rules('transaction_pobox', 'Po Box', 'trim|required');
 		$this->form_validation->set_rules('transaction_total_price', 'Total Harga Sewa', 'trim|required');
@@ -97,7 +111,8 @@ class Transaction extends CI_Controller {
 
         	$data = array(
 				'transaction_id' => $this->input->post('transaction_id'),
-				'transaction_status' => '2'
+				'transaction_status' => '2',
+				'transaction_date_pay' => date('Y-m-d H:i:s')
 			);
 			$this->TransactionModel->update($data);
 

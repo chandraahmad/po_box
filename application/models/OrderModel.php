@@ -24,6 +24,14 @@ class OrderModel extends CI_Model {
 		return $query->row();
 	}
 
+	public function get_byid_user($user_id) {
+		$this->db->select('*');
+		$this->db->from('user');
+		$this->db->where('user_id', $user_id);
+		$query = $this->db->get();
+		return $query->row();
+	}
+
 	public function update($data) {
 		$this->db->where('transaction_id',$data['transaction_id']);
 		unset($data['transaction_id']);

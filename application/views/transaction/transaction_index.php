@@ -25,12 +25,12 @@
                                             <div class="card card-primary">
                                                 <div class="card-header">
                                                     <h4 class="card-title">
-                                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                                        <a data-toggle="collapse" data-parent="#accordion" href="#KANTORPOS">
                                                             KANTOR POS
                                                         </a>
                                                     </h4>
                                                 </div>
-                                                <div id="collapseOne" class="panel-collapse collapse in">
+                                                <div id="KANTORPOS" class="panel-collapse collapse in">
                                                     <div class="card-body">
                                                         Transfer ke Rek
                                                     </div>
@@ -39,28 +39,56 @@
                                             <div class="card card-primary">
                                                 <div class="card-header">
                                                     <h4 class="card-title">
-                                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                                        <a data-toggle="collapse" data-parent="#accordion" href="#BANKBCA">
+                                                            BANK BCA
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="BANKBCA" class="panel-collapse collapse">
+                                                    <div class="card-body">
+                                                        BCA VIRTUAL ACCOUNT 81610 0400002663
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card card-primary">
+                                                <div class="card-header">
+                                                    <h4 class="card-title">
+                                                        <a data-toggle="collapse" data-parent="#accordion" href="#BANKMandiri">
+                                                            BANK Mandiri
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="BANKMandiri" class="panel-collapse collapse">
+                                                    <div class="card-body">
+                                                        Mandiri virtula account 88588 0400002663
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card card-primary">
+                                                <div class="card-header">
+                                                    <h4 class="card-title">
+                                                        <a data-toggle="collapse" data-parent="#accordion" href="#BANKBNI">
                                                             BANK BNI
                                                         </a>
                                                     </h4>
                                                 </div>
-                                                <div id="collapseTwo" class="panel-collapse collapse">
+                                                <div id="BANKBNI" class="panel-collapse collapse">
                                                     <div class="card-body">
-                                                        Transfer ke Rek
+                                                        BNI Virtual account 816109 0400002663
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="card card-primary">
                                                 <div class="card-header">
                                                     <h4 class="card-title">
-                                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                                            BANK BTN
+                                                        <a data-toggle="collapse" data-parent="#accordion" href="#BANKBNISyariah">
+                                                            BANK BNI Syariah
                                                         </a>
                                                     </h4>
                                                 </div>
-                                                <div id="collapseThree" class="panel-collapse collapse">
+                                                <div id="BANKBNISyariah" class="panel-collapse collapse">
                                                     <div class="card-body">
-                                                        Transfer ke Rek
+                                                        BNI SYARIAH virtual account 866400 0400002663
                                                     </div>
                                                 </div>
                                             </div>
@@ -112,6 +140,11 @@
                                         <div class="col-sm-12">
                                             Anda sekarang sudah memiliki PO BOX dengan nomor <?= $valDate->transaction_pobox ?> <br>
                                             Anda hanya diperkenankan menyewa 1 PO BOX saja<br>
+                                            <?php if (@$this->TransactionModel->get_expired_po_box($valDate->transaction_pobox)->selisihDate <= 10) { ?>
+                                            <strong>Peringatan !!! waktu sewa Po Box anda akan berakhir pada tanggal <?= (new DateTime($valDate->transaction_until_date))->format('d F Y'); ?></strong><br>
+                                            <strong>segera perpanjang sewa anda</strong>
+                                            <a href="<?= base_url('Transaction/extension_form?id='.$valDate->transaction_pobox) ?>" class="btn btn-primary btn-sm">Perpanjang Sewa</a>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                 </div>
@@ -121,34 +154,76 @@
                     <?php } ?>
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark"> Po Box Number</h1>
+                            <h1 class="m-0 text-dark"> Po Box Number <?= @$valDate->transaction_pobox ?></h1>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.content-header -->
-
-            <!-- Main content -->
-            <div class="content">
-                <div class="container">
-                    <div class="row">
-						<?php foreach ($GetAllPoBox as $key => $value) { 
-                            if (@$this->TransactionModel->get_byid_transaction('transaction_pobox', $value->pobox_id) == NULL) {
-                        ?>
-                            <div class="col-12 col-sm-6 col-md-2">
-                                <a href="<?= base_url('Transaction/detail_pobox?id='.$value->pobox_id) ?>">
-                                    <div class="info-box">
-                                        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-box"></i></span>
-                                        <div class="info-box-content">
-                                            <span class="info-box-text"><?= $value->pobox_id ?></span>
-                                        </div>
+            <?php if (@$valDate->transaction_status == '3') { ?>
+                <!-- Main content -->
+                <div class="content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">List Kiriman</h3>
                                     </div>
-                                </a>
+                                    <div class="card-body">
+                                        <table id="example1" class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>No Barcode / No Resi</th>
+                                                    <th>Petugas Entry</th>
+                                                    <th>Tanggal Entry</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php 
+                                                $GetByPoBoxShipment = $this->TransactionModel->get_bypobox_shipment(@$valDate->transaction_pobox);
+                                                $no = 1; 
+                                                foreach ($GetByPoBoxShipment as $key => $value) { 
+                                                ?>
+                                                <tr>
+                                                    <td><?= $no++ ?></td>
+                                                    <td><?= $value->shipment_barcode ?></td>
+                                                    <td><?= $this->TransactionModel->get_byid_user($value->shipment_officer)->user_name ?></td>
+                                                    <td><?= $value->shipment_date_entry ?></td>
+                                                </tr>
+                                                <?php } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
-						<?php }} ?>
-					</div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            <?php }else{ ?>
+                <!-- Main content -->
+                <div class="content">
+                    <div class="container">
+                        <div class="row">
+                            <?php foreach ($GetAllPoBox as $key => $value) { 
+                                if (@$this->TransactionModel->get_byid_transaction('transaction_pobox', $value->pobox_id) == NULL) {
+                            ?>
+                                <div class="col-12 col-sm-6 col-md-2">
+                                    <a href="<?= base_url('Transaction/detail_pobox?id='.$value->pobox_id) ?>">
+                                        <div class="info-box">
+                                            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-box"></i></span>
+                                            <div class="info-box-content">
+                                                <span class="info-box-text"><?= $value->pobox_id ?></span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            <?php }} ?>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
         </div>
         <?php $this->load->view('layouts/content_footer_fe.php'); ?>
     </div>

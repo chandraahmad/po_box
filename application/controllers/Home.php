@@ -13,15 +13,17 @@ class Home extends CI_Controller {
 	}
 
 	public function index() {
-		if($this->session->userdata('user_type') == '1') {
+		if($this->session->userdata('user_type') == '1' || $this->session->userdata('user_type') == '2') {
 			$data['js_p'] = "home.js";
 			$data['GetAllPoBox'] = $this->HomeModel->get_all_pobox();
-			// $data['GetAllEvent'] = $this->HomeModel->get_all_event();
-			// $data['GetAllFloorGuest'] = $this->HomeModel->get_all_floorguest();
+			$data['GetAllTransaction'] = $this->HomeModel->get_all_transaction();
+			$data['GetAllUser'] = $this->HomeModel->get_all_user();
+			$data['GetIncome'] = $this->HomeModel->get_income();
+			$data['GetExpenses'] = $this->HomeModel->get_expenses();
 			$this->load->view('layouts/header.php');
 			$this->load->view('home/home_index', $data);
 			$this->load->view('layouts/footer.php', $data);
-		}elseif($this->session->userdata('user_type') == '4'){
+		}elseif($this->session->userdata('user_type') == '3'){
 			redirect();
 		}
 	}

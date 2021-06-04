@@ -25,52 +25,48 @@
 			          	<div class="col-lg-3 col-6">
 				            <div class="small-box bg-info">
 				              	<div class="inner">
-				                	<h3></h3>
-				                	<p>Total Guest</p>
+				                	<h4><?= count($GetAllUser) ?></h4>
+				                	<p>User/Customer Active</p>
 				              	</div>
 				              	<div class="icon">
 				                	<i class="fas fa-user-tie"></i>
 				              	</div>
-				              	<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
 				            </div>
 			          	</div>
 
 			          	<div class="col-lg-3 col-6">
 				            <div class="small-box bg-success">
 				              	<div class="inner">
-				                	<h3></h3>
-				                	<p>Total Event</p>
+				                	<h4><?= count($GetAllTransaction) ?></h4>
+				                	<p>Total Transaction</p>
 				              	</div>
 				              	<div class="icon">
-				                	<i class="fas fa-calendar-alt"></i>
+				                	<i class="fas fa-shopping-cart"></i>
 				              	</div>
-				              	<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
 				            </div>
 			          	</div>
 
 			          	<div class="col-lg-3 col-6">
 				            <div class="small-box bg-warning">
 				              	<div class="inner">
-				                	<h3></h3>
-				                	<p>Total Visits</p>
+				                	<h4><?= number_format($GetIncome->income); ?></h4>
+				                	<p>Total Income</p>
 				              	</div>
 				              	<div class="icon">
-				                	<i class="fas fa-universal-access"></i>
+				                	<i class="fas fa-dollar-sign"></i>
 				              	</div>
-				              	<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
 				            </div>
 			          	</div>
 
 			          	<div class="col-lg-3 col-6">
 				            <div class="small-box bg-danger">
 				              	<div class="inner">
-					                <h3>65</h3>
-					                <p>Unique Visitors</p>
+					                <h4><?= number_format($GetExpenses->expenses) ?></h4>
+					                <p>Total Expenses</p>
 				              	</div>
 				              	<div class="icon">
 				                	<i class="ion ion-pie-graph"></i>
 				              	</div>
-				              	<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
 				            </div>
 			          	</div>
 			        </div>
@@ -103,14 +99,18 @@
 									<span class="info-box-icon bg-danger elevation-1"><i class="fas fa-box"></i></span>
 									<div class="info-box-content">
 										<span class="info-box-text"><?= $value->pobox_id ?></span>
-										<span class="info-box-number">Exist</span>
+										<?php if (@$this->HomeModel->get_expired_po_box($value->pobox_id)->selisihDate <= 10) { ?>
+											<span class="info-box-number">Will be expired</span>
+										<?php }else{ ?>
+											<span class="info-box-number">Exist</span>
+										<?php } ?>
 									</div>
 								</div>
 							</div>
 						<?php }} ?>
 					</div>
 
-			        <div class="row">
+			        <!-- <div class="row">
 			        	<div class="col-lg-12 col-12">
 			        		<div class="card">
 				        		<div class="card-header">
@@ -134,7 +134,7 @@
 				              	</div>
 				        	</div>
 			        	</div>
-			        </div>
+			        </div> -->
 	     	 	</div>
 	    	</section>
 	  	</div>

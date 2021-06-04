@@ -21,7 +21,6 @@
                     <option value="1" <?= (@$GetByIdUser->user_type == '1' ? 'selected="selected"' : '' ) ?>>Super Administrator</option>
                     <option value="2" <?= (@$GetByIdUser->user_type == '2' ? 'selected="selected"' : '' ) ?>>Administrator</option>
                     <option value="3" <?= (@$GetByIdUser->user_type == '3' ? 'selected="selected"' : '' ) ?>>User</option>
-                    <option value="4" <?= (@$GetByIdUser->user_type == '4' ? 'selected="selected"' : '' ) ?>>Customer</option>
                 </select>
             </div>
         </div>

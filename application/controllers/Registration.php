@@ -30,7 +30,7 @@ class Registration extends CI_Controller {
 					'user_name' => $this->input->post('user_name'),
 					'user_email' => $this->input->post('user_email'),
 					'user_password' => md5($this->input->post('user_password1')),
-					'user_type' => '4',
+					'user_type' => '3',
 					'user_status' => '1'
 				);
 				$result = $this->RegistrationModel->insert($data);

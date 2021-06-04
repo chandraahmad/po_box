@@ -51,7 +51,6 @@
 													<option value="1">Super Administrator</option>
 													<option value="2">Administrator</option>
 													<option value="3">User</option>
-													<option value="4">Customer</option>
 												</select>
 				                            </div>
 				                        </div>
