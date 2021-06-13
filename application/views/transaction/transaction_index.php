@@ -6,9 +6,13 @@
             <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container">
-                    <?php 
-                    $valDate = @$this->TransactionModel->get_byid_transaction('transaction_user', $this->session->userdata('user_id'));
-                    if (@$valDate->transaction_status == '1') { ?>
+                    <?php $valDate = @$this->TransactionModel->get_byid_transaction('transaction_user', $this->session->userdata('user_id')); ?>
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0 text-dark"> Po Box Number <?= @$valDate->transaction_pobox ?></h1>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                    <?php if (@$valDate->transaction_status == '1') { ?>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card card-info">
@@ -131,7 +135,7 @@
                             </div>
                         </div>
                     </div>
-                    <?php }elseif (@$valDate->transaction_status == '3') { ?>
+                    <?php }elseif (@$valDate->transaction_status == '3' && @$this->TransactionModel->get_expired_po_box($valDate->transaction_pobox)->transaction_until_date >= date('Y-m-d')) { ?>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card card-info">
@@ -143,7 +147,7 @@
                                             <?php if (@$this->TransactionModel->get_expired_po_box($valDate->transaction_pobox)->selisihDate <= 10) { ?>
                                             <strong>Peringatan !!! waktu sewa Po Box anda akan berakhir pada tanggal <?= (new DateTime($valDate->transaction_until_date))->format('d F Y'); ?></strong><br>
                                             <strong>segera perpanjang sewa anda</strong>
-                                            <a href="<?= base_url('Transaction/extension_form?id='.$valDate->transaction_pobox) ?>" class="btn btn-primary btn-sm">Perpanjang Sewa</a>
+                                            <a href="<?= base_url('Transaction/detail_pobox?id='.$valDate->transaction_pobox) ?>" class="btn btn-primary btn-sm">Perpanjang Sewa</a>
                                             <?php } ?>
                                         </div>
                                     </div>
@@ -152,15 +156,11 @@
                         </div>
                     </div>
                     <?php } ?>
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0 text-dark"> Po Box Number <?= @$valDate->transaction_pobox ?></h1>
-                        </div><!-- /.col -->
-                    </div><!-- /.row -->
+                    
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.content-header -->
-            <?php if (@$valDate->transaction_status == '3') { ?>
+            <?php if (@$valDate->transaction_status == '3' && @$this->TransactionModel->get_expired_po_box($valDate->transaction_pobox)->transaction_until_date >= date('Y-m-d')) { ?>
                 <!-- Main content -->
                 <div class="content">
                     <div class="container">
@@ -175,6 +175,11 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
+                                                    <th>
+                                                        <div class="form-check">
+                                                            <input type="checkbox" id="checkAll" />
+                                                        </div>
+                                                    </th>
                                                     <th>No Barcode / No Resi</th>
                                                     <th>Petugas Entry</th>
                                                     <th>Tanggal Entry</th>
@@ -188,6 +193,11 @@
                                                 ?>
                                                 <tr>
                                                     <td><?= $no++ ?></td>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="testaja" name="manifest_detail_check[]" value="" id="defaultCheckbox" />
+                                                        </div>
+                                                    </td>
                                                     <td><?= $value->shipment_barcode ?></td>
                                                     <td><?= $this->TransactionModel->get_byid_user($value->shipment_officer)->user_name ?></td>
                                                     <td><?= $value->shipment_date_entry ?></td>
@@ -201,7 +211,7 @@
                         </div>
                     </div>
                 </div>
-            <?php }else{ ?>
+            <?php }elseif (@$valDate == NULL) { ?>
                 <!-- Main content -->
                 <div class="content">
                     <div class="container">

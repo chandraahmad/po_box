@@ -20,30 +20,22 @@ class Transaction extends CI_Controller {
 		$id = @$_GET['id'];
 		$data['js_p'] = "transaction.js";
 		$data['GetByIdPoBox'] = $this->TransactionModel->get_byid_pobox($id);
-		$data['GetByIdTransaction'] = $this->TransactionModel->get_byid_transaction('transaction_pobox', $id);
-		if($data['GetByIdPoBox'] != NULL && $data['GetByIdTransaction'] == NULL && $this->session->userdata('user_email') != NULL) {
+
+		if($data['GetByIdPoBox'] != NULL && $this->session->userdata('user_email') != NULL) {
 			$valDate = @$this->TransactionModel->get_byid_transaction('transaction_user', $this->session->userdata('user_id'));
-			if (str_replace('-', '', @$valDate->transaction_until_date) < date('Y-m-d')) {
+			if (str_replace('-', '', @$valDate->transaction_until_date) <= date('Ymd')) {
 				$this->load->view('layouts/header_fe.php');
 				$this->load->view('transaction/transaction_pobox', $data);
 				$this->load->view('layouts/footer_fe.php', $data);
 			}else{
-				redirect();	
+				if (@$this->TransactionModel->get_expired_po_box($id)->selisihDate <= 10) {
+					$this->load->view('layouts/header_fe.php');
+					$this->load->view('transaction/transaction_pobox', $data);
+					$this->load->view('layouts/footer_fe.php', $data);
+				}else{
+					redirect();	
+				}
 			}
-		}else{
-			redirect();
-		}
-	}
-
-	public function extension_form1() {
-		$id = @$_GET['id'];
-		$data['js_p'] = "transaction.js";
-		$data['GetByIdPoBox'] = $this->TransactionModel->get_byid_pobox($id);
-		if($data['GetByIdPoBox'] != NULL && $this->session->userdata('user_email') != NULL) {
-			$valDate = @$this->TransactionModel->get_byid_transaction('transaction_user', $this->session->userdata('user_id'));
-			$this->load->view('layouts/header_fe.php');
-			$this->load->view('transaction/transaction_pobox', $data);
-			$this->load->view('layouts/footer_fe.php', $data);
 		}else{
 			redirect();
 		}

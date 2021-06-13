@@ -22,7 +22,15 @@ $(document).on('submit', '#insert_transaction', function(e){
     }).done(function(data) {
         var out = jQuery.parseJSON(data);
         if (out.status == 'true') {
-          SuccessMessage(out);
+            Swal.fire({
+                title: out.msg_header,
+                text: out.msg,
+                timer: 1000,
+                showConfirmButton: false,
+                icon: 'success'
+            }).then(result => {
+                window.location.replace(out.url);
+            })          
         } else {
           ErrorMessage(out);
         }
@@ -67,6 +75,16 @@ function countTotalPrice() {
     })
 }
 
+$(document).on('change', '#checkAll', function(){
+    $('table tbody tr').each(function() {
+        var $tr = $(this);
+        if ($tr.find('.testaja').is(':checked')) {
+            $tr.find('.testaja').prop('checked', false);
+        }else{
+            $tr.find('.testaja').prop('checked', true);
+        }
+    });
+});
 function SuccessMessage(data) {
   Swal.fire({
         title: data.msg_header,

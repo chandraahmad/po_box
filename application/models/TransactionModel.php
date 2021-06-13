@@ -28,6 +28,7 @@ class TransactionModel extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('transaction');
 		$this->db->where($param, $transaction_pobox);
+		$this->db->order_by('transaction_id', 'DESC');
 		$query = $this->db->get();
 		return $query->row();
 	}
@@ -74,9 +75,10 @@ class TransactionModel extends CI_Model {
 	}
 
 	public function get_expired_po_box($transaction_pobox) {
-		$this->db->select('datediff(transaction_until_date, current_date()) As selisihDate');
+		$this->db->select('datediff(transaction_until_date, current_date()) As selisihDate, transaction_until_date');
 		$this->db->from('transaction');
 		$this->db->where('transaction_pobox', $transaction_pobox);
+		$this->db->order_by('transaction_id', 'DESC');
 		$query = $this->db->get();
 		return $query->row();
 	}
