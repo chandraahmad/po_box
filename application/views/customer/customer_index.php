@@ -21,67 +21,6 @@
 		    <section class="content">
 		      	<div class="container-fluid">
 			        <div class="row">
-			          	<div class="col-lg-12 col-12">
-			          		<div class="card card-info">
-			          			<form class="form-horizontal" id="insert_customer" method="POST" enctype="multipart/form-data">
-				                    <div class="card-body">
-				                        <div class="form-group row">
-				                            <label class="col-sm-2 col-form-label">Customer Name *</label>
-				                            <div class="col-sm-10">
-				                                <input type="text" name="customer_name" class="form-control form-control-sm" placeholder="Customer Name *" required>
-				                            </div>
-				                        </div>
-										<div class="form-group row">
-				                            <label class="col-sm-2 col-form-label">Address *</label>
-				                            <div class="col-sm-10">
-				                                <input type="text" name="customer_address" class="form-control form-control-sm" placeholder="Address *" required>
-				                            </div>
-				                        </div>
-										<div class="form-group row">
-				                            <label class="col-sm-2 col-form-label">PIC *</label>
-				                            <div class="col-sm-10">
-				                                <input type="text" name="customer_pic" class="form-control form-control-sm" placeholder="PIC *" required>
-				                            </div>
-				                        </div>
-                                        <div class="form-group row">
-				                            <label class="col-sm-2 col-form-label">Contact *</label>
-				                            <div class="col-sm-10">
-				                                <input type="text" name="customer_contact" class="form-control form-control-sm" placeholder="Contact *" required>
-				                            </div>
-				                        </div>
-                                        <div class="form-group row">
-				                            <label class="col-sm-2 col-form-label">Email *</label>
-				                            <div class="col-sm-10">
-				                                <input type="text" name="customer_email" class="form-control form-control-sm" placeholder="Email *" required>
-				                            </div>
-				                        </div>
-										<div class="form-group row clearfix">
-				                            <label class="col-sm-2 col-form-label">Status *</label>
-				                            <div class="col-sm-10">
-												<div class="icheck-primary d-inline">
-													<input type="radio" id="Status1" name="customer_status" value="1">
-													<label for="Status1">
-														Active
-													</label>
-												</div>
-												<div class="icheck-primary d-inline">
-													<input type="radio" id="Status2" name="customer_status" value="2">
-													<label for="Status2">
-														Not Active
-													</label>
-												</div>
-				                            </div>
-				                        </div>
-				                    </div>
-				                    <div class="card-footer">
-				                        <button type="submit" class="btn btn-primary float-right">Save</button>
-				                    </div>
-								</form>
-			          		</div>
-			          	</div>
-			        </div>
-
-			        <div class="row">
 			        	<div class="col-lg-12 col-12">
 			        		<div class="card">
 				        		<div class="card-header">
