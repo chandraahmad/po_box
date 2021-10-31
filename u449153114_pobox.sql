@@ -1,4 +1,21 @@
-USE `u449153114_pobox`;
+-- --------------------------------------------------------
+-- Host:                         localhost
+-- Server version:               10.4.14-MariaDB - mariadb.org binary distribution
+-- Server OS:                    Win64
+-- HeidiSQL Version:             11.1.0.6116
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+-- Dumping database structure for db_pobox
+CREATE DATABASE IF NOT EXISTS `db_pobox` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+USE `db_pobox`;
 
 -- Dumping structure for table db_pobox.customer
 CREATE TABLE IF NOT EXISTS `customer` (
@@ -87,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `shipment` (
   PRIMARY KEY (`shipment_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table db_pobox.shipment: ~16 rows (approximately)
+-- Dumping data for table db_pobox.shipment: ~15 rows (approximately)
 /*!40000 ALTER TABLE `shipment` DISABLE KEYS */;
 INSERT INTO `shipment` (`shipment_id`, `shipment_barcode`, `shipment_pobox`, `shipment_officer`, `shipment_date_entry`) VALUES
 	('SHP00001', '11440001', '130001', 'USR00001', '2021-06-04 15:16:47'),
@@ -124,15 +141,16 @@ CREATE TABLE IF NOT EXISTS `transaction` (
   PRIMARY KEY (`transaction_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table db_pobox.transaction: ~6 rows (approximately)
+-- Dumping data for table db_pobox.transaction: ~7 rows (approximately)
 /*!40000 ALTER TABLE `transaction` DISABLE KEYS */;
 INSERT INTO `transaction` (`transaction_id`, `transaction_pobox`, `transaction_user`, `transaction_total_price`, `transaction_from_date`, `transaction_until_date`, `transaction_month`, `transaction_status`, `transaction_date`, `transaction_date_pay`, `transaction_date_confirm`) VALUES
 	('TRX00001', '130001', 'USR00004', '600000', '2021-05-30', '2022-05-30', 12, '3', '2021-05-30 13:44:23', '2021-06-04 20:36:16', '2021-06-04 20:36:18'),
 	('TRX00002', '130003', 'USR00002', '600000', '2021-06-01', '2022-06-01', 12, '3', '2021-06-01 08:04:16', '2021-06-04 20:36:15', '2021-06-04 20:36:18'),
 	('TRX00003', '130004', 'USR00003', '600000', '2021-06-01', '2022-06-01', 12, '3', '2021-06-01 09:21:08', '2021-06-04 20:36:14', '2021-06-04 20:36:19'),
 	('TRX00004', '130002', 'USR00006', '300000', '2021-06-01', '2021-12-01', 6, '3', '2021-06-01 15:22:51', '2021-06-04 20:36:13', '2021-06-04 20:36:20'),
-	('TRX00005', '130005', 'USR00008', '250000', '2021-06-02', '2021-06-12', 5, '3', '2021-06-02 14:58:46', '2021-06-04 20:36:12', '2021-06-04 20:36:21'),
-	('TRX00006', '209010', 'USR00005', '600000', '2021-06-04', '2022-06-04', 12, '3', '2021-06-04 15:35:17', '2021-06-04 15:35:29', '2021-06-04 15:35:58');
+	('TRX00005', '130005', 'USR00008', '250000', '2021-06-02', '2021-06-14', 5, '3', '2021-06-02 14:58:46', '2021-06-04 20:36:12', '2021-06-04 20:36:21'),
+	('TRX00006', '209010', 'USR00005', '600000', '2021-06-04', '2022-06-04', 12, '3', '2021-06-04 15:35:17', '2021-06-04 15:35:29', '2021-06-04 15:35:58'),
+	('TRX00007', '130005', 'USR00008', '50000', '2021-06-12', '2021-07-12', 1, '3', '2021-06-12 06:47:37', '2021-06-12 06:47:44', '2021-06-12 06:48:05');
 /*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
 
 -- Dumping structure for table db_pobox.user
@@ -146,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table db_pobox.user: ~9 rows (approximately)
+-- Dumping data for table db_pobox.user: ~8 rows (approximately)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`user_id`, `user_name`, `user_email`, `user_password`, `user_status`, `user_type`) VALUES
 	('USR00001', 'Chandra Ahmad Rizki', 'admin@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '1', '1'),

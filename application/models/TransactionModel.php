@@ -45,6 +45,7 @@ class TransactionModel extends CI_Model {
         $this->db->select('*');
 		$this->db->from('shipment');
 		$this->db->where('shipment_pobox', $shipment_pobox);
+		$this->db->where('shipment_status', '0');
 		$this->db->order_by('shipment_id', 'DESC');
 		$query = $this->db->get();        
 		return $query->result();
@@ -74,10 +75,11 @@ class TransactionModel extends CI_Model {
 		return $char.$id;
 	}
 
-	public function get_expired_po_box($transaction_pobox) {
+	public function get_expired_po_box($transaction_pobox, $user_id) {
 		$this->db->select('datediff(transaction_until_date, current_date()) As selisihDate, transaction_until_date');
 		$this->db->from('transaction');
 		$this->db->where('transaction_pobox', $transaction_pobox);
+		$this->db->where('transaction_user', $user_id);
 		$this->db->order_by('transaction_id', 'DESC');
 		$query = $this->db->get();
 		return $query->row();
@@ -99,6 +101,14 @@ class TransactionModel extends CI_Model {
 		$this->db->where('pobox_id',$data['pobox_id']);
 		unset($data['pobox_id']);
 		$quesry = $this->db->update('pobox', $data);
+		return $quesry;
+	}
+
+	public function update_shipment($data) {
+		$this->db->where('shipment_status', '0');
+		$this->db->where('shipment_pobox', $data['shipment_pobox']);
+		unset($data['shipment_pobox']);
+		$quesry = $this->db->update('shipment', $data);
 		return $quesry;
 	}
 }

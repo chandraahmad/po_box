@@ -28,7 +28,7 @@ class Transaction extends CI_Controller {
 				$this->load->view('transaction/transaction_pobox', $data);
 				$this->load->view('layouts/footer_fe.php', $data);
 			}else{
-				if (@$this->TransactionModel->get_expired_po_box($id)->selisihDate <= 10) {
+				if (@$this->TransactionModel->get_expired_po_box($id, $this->session->userdata('user_id'))->selisihDate <= 10) {
 					$this->load->view('layouts/header_fe.php');
 					$this->load->view('transaction/transaction_pobox', $data);
 					$this->load->view('layouts/footer_fe.php', $data);
@@ -142,5 +142,15 @@ class Transaction extends CI_Controller {
 			$out['msg'] = 'Data not available';
 		}
 		echo json_encode($out);
+	}
+
+	public function takeParcel($pobox = NULL) {
+		$data = array(
+			'shipment_pobox' => $pobox,
+			'shipment_status' => '1',
+			'shipment_status_date' => date('Y-m-d H:i:s')
+		);
+		$result = $this->TransactionModel->update_shipment($data);
+		redirect();
 	}
 }

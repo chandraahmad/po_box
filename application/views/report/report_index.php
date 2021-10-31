@@ -35,6 +35,8 @@
 												<th>Barcode/Resi Number</th>
 												<th>Po Box</th>
 												<th>Date Entry</th>
+												<th>Status</th>
+                                                <th>Status Date</th>
 											</tr>
 										</thead>
 		                  				<tbody>
@@ -45,6 +47,8 @@
 												<td><?= $value->shipment_barcode ?></td>
 												<td><?= $value->shipment_pobox ?></td>
 												<td><?= $value->shipment_date_entry ?></td>
+												<td><?= ($value->shipment_status == 0 ? 'Not taken yet' : 'Already taked') ?></td>
+                                                <td><?= $value->shipment_status_date ?></td>
 											</tr>
 											<?php } ?>
 										</tbody>

@@ -8,8 +8,7 @@ class Registration extends CI_Controller {
 		$this->load->model('RegistrationModel');
 	}
 
-	public function index()
-	{
+	public function index() {
 		$datajs['js_p'] = "registration.js";
 		$this->load->view('layouts/header.php');
 		$this->load->view('registration/registration_index');
@@ -55,5 +54,12 @@ class Registration extends CI_Controller {
 			$out['msg'] = validation_errors();
 		}
 		echo json_encode($out);
+	}
+
+	public function terms() {
+		$datajs['js_p'] = "registration.js";
+		$this->load->view('layouts/header.php');
+		$this->load->view('registration/registration_term');
+		$this->load->view('layouts/footer.php', $datajs);	
 	}
 }

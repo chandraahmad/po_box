@@ -29,7 +29,7 @@
 				                        <div class="form-group row">
 				                            <label class="col-sm-2 col-form-label">Barcode / Resi Number *</label>
 				                            <div class="col-sm-10">
-				                                <input type="text" name="shipment_barcode" class="form-control form-control-sm" placeholder="Barcode / Resi Number" required>
+				                                <input type="text" name="shipment_barcode" class="form-control form-control-sm" placeholder="Barcode / Resi Number" required autofocus>
 				                            </div>
 				                        </div>
 				                    </div>
