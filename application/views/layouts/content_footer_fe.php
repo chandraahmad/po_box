@@ -5,5 +5,5 @@
         El-Rusta Studio
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2021 El-Rusta Studio</strong> All rights reserved.
+    <strong>Copyright &copy; 2021 Pos Indonesia</strong> All rights reserved.
 </footer>

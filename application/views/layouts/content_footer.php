@@ -2,7 +2,7 @@
     <div class="float-right d-none d-sm-block">
       	<b>Version</b> 3.0.5
     </div>
-    <strong>Copyright &copy; 2021 El-Rusta Studio.</strong> All rights reserved.
+    <strong>Copyright &copy; 2021 Pos Indonesia.</strong> All rights reserved.
 </footer>
 <aside class="control-sidebar control-sidebar-dark">
 </aside>

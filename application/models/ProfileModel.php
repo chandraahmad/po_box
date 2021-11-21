@@ -32,18 +32,19 @@ class ProfileModel extends CI_Model {
 	}
 
 	public function generate_customer_id() {
-		$query=$this->db->query("SELECT MAX(RIGHT(customer_id,2)) AS id_max FROM customer");
+		$query=$this->db->query("SELECT MAX(RIGHT(`customer_id`, 11)) AS max_id FROM `customer`");
+		$last=$this->db->query("SELECT MAX(MID(`customer_id`, 4, 6)) AS last_data FROM `customer`")->row()->last_data;
+		$current = date('ymd');
 		$id = "";
-		if($query->num_rows() > 0){
-			foreach($query->result() as $kd){
-                $tmp = ((int)$kd->id_max)+1;
-                $id = sprintf("%05s", $tmp);
+		if($query->num_rows() > 0 AND $last == $current){
+			foreach($query->result() as $code){
+                $tmp = ($code->max_id)+1;
+                $id = substr($tmp, -5);
             }
 		}else{
 			$id = "00001";
 		}
-
-		$char = "CSR";
+		$char = "CSR".$current;
 		return $char.$id;
 	}
 
