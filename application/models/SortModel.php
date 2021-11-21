@@ -50,6 +50,7 @@ class SortModel extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('shipment');
 		$this->db->where('shipment_pobox', $shipment_pobox);
+		$this->db->where('shipment_status', '0');
 		$query = $this->db->get();
 		return $query->result();
 	}

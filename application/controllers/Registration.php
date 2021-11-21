@@ -31,9 +31,12 @@ class Registration extends CI_Controller {
 					'user_email' => $this->input->post('user_email'),
 					'user_password' => md5($this->input->post('user_password1')),
 					'user_type' => '3',
-					'user_status' => '1'
+					'user_status' => '0',
+					'user_created' => date('Y-m-d H:i:s')
 				);
 				$result = $this->RegistrationModel->insert($data);
+
+				$this->email_verification($data['user_id']);
 
 				if ($result == TRUE) {
 					$out['status'] = 'true';
@@ -57,10 +60,56 @@ class Registration extends CI_Controller {
 		echo json_encode($out);
 	}
 
+	public function active_account() {
+		$user_id = @$this->input->get('user_id');
+		$data['data_email'] = $this->RegistrationModel->get_byid_user($user_id);
+		if($data['data_email'] != NULL) {
+			$data = array(
+				'user_id' => $user_id,
+				'user_status' => '1'
+			);
+	
+			$this->RegistrationModel->update($data);
+			$this->load->view('registration/registration_verification');
+		}else{
+			$this->load->view('404Notfound');
+		}
+	}
+
+	public function email_verification($id) {
+		$data['data_email'] = $this->RegistrationModel->get_byid_user($id);
+		$mailing = Array(
+			'protocol' => 'smtp',
+			'smtp_host' => 'ssl://smtp.gmail.com',
+			'smtp_port' => 465,
+			// 'smtp_user' => 'admin.hris@poslogistics.co.id',
+			// 'smtp_pass' => 'Hris0987',
+			'smtp_user' => 'helpdesk@poslogistics.co.id',
+			'smtp_pass' => 'poslog@2021',
+			'mailtype'  => 'html', 
+			'charset'   => 'utf-8',
+			'wordwrap' => TRUE
+		);
+		$this->load->library('email');
+        $this->email->initialize($mailing);
+		$this->email->set_newline("\r\n");
+    	$this->email->from($mailing['smtp_user'], 'E-PO BOX');
+		$this->email->to($data['data_email']->user_email);
+		$this->email->subject('Email Verifictaion E-PO BOX');
+		$this->email->message($this->load->view('email_verification.html', $data, true));
+		return $this->email->send();
+		// echo $this->email->print_debugger();
+	}
+
 	public function terms() {
 		$datajs['js_p'] = "registration.js";
 		$this->load->view('layouts/header.php');
 		$this->load->view('registration/registration_term');
 		$this->load->view('layouts/footer.php', $datajs);	
+	}
+
+	public function test_page() {
+		$data['data_email'] = $this->RegistrationModel->get_byid_user('USR21112100001');
+		$this->load->view('404Notfound', $data);
 	}
 }

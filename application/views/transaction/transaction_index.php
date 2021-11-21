@@ -189,7 +189,7 @@
                                                 ?>
                                                 <tr>
                                                     <td><?= $no++ ?></td>
-                                                    <td><?= $value->shipment_barcode ?></td>
+                                                    <td><a href="http://posindonesia.co.id/en/tracking" target="_blank"><?= $value->shipment_barcode ?></a></td>
                                                     <td><?= $this->TransactionModel->get_byid_user($value->shipment_officer)->user_name ?></td>
                                                     <td><?= $value->shipment_date_entry ?></td>
                                                 </tr>
