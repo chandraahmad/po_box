@@ -43,7 +43,8 @@
 			        </div>
 		      	</form>
 				<p class="mb-0">
-					<a href="<?= base_url('Registration') ?>" class="text-center">Register a new membership</a>
+					<a href="<?= base_url('Registration') ?>" class="text-center">Register a new membership</a><br>
+					<a href="<?= base_url('Forgotpassword') ?>" class="text-center">Forgot the password ?</a>
 				</p>
 		    </div>
 		    <!-- /.login-card-body -->
